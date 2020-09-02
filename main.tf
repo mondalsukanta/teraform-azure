@@ -1,3 +1,21 @@
+# Configure the Microsoft Azure Provider
+provider "azurerm" {
+  # We recommend pinning to the specific version of the Azure Provider you're using
+  # since new versions are released frequently
+  version = "=2.20.0"
+
+  features {}
+
+  # More information on the authentication methods supported by
+  # the AzureRM Provider can be found here:
+  # http://terraform.io/docs/providers/azurerm/index.html
+
+  # subscription_id = "..."
+  # client_id       = "..."
+  # client_secret   = "..."
+  # tenant_id       = "..."
+}
+
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
     name = "Terra-K8s-Practise"
