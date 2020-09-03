@@ -3,11 +3,13 @@ provider "azurerm" {
   version = "=2.5.0"
   features {}
 }
-
+  
+# Create Resource Group
 ## <https://www.terraform.io/docs/providers/azurerm/r/resource_group.html>
 resource "azurerm_resource_group" "rg" {
   name     = "TerraformTesting"
   location = var.location
+  tags = var.tags
 }
 
 ## <https://www.terraform.io/docs/providers/azurerm/r/availability_set.html>
@@ -17,14 +19,26 @@ resource "azurerm_availability_set" "DemoAset" {
   resource_group_name = azurerm_resource_group.rg.name
 }
 
+# Create Vitural Network
 ## <https://www.terraform.io/docs/providers/azurerm/r/virtual_network.html>
 resource "azurerm_virtual_network" "vnet" {
   name                = "vNet"
   address_space       = ["10.0.0.0/16"]
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags = var.tags
 }
 
+# Create public IP
+resource "azurerm_public_ip" "publicip" {
+  name                = "${var.prefix}PublicIP"
+  location            = var.location
+  resource_group_name = azurerm_resource_group.rg.name
+  allocation_method   = "Dynamic"
+  tags                = var.tags
+}
+
+# Create Subnet
 ## <https://www.terraform.io/docs/providers/azurerm/r/subnet.html> 
 resource "azurerm_subnet" "subnet" {
   name                 = "internal"
@@ -33,11 +47,13 @@ resource "azurerm_subnet" "subnet" {
   address_prefix       = "10.0.2.0/24"
 }
 
+# Create network interface
 ## <https://www.terraform.io/docs/providers/azurerm/r/network_interface.html>
 resource "azurerm_network_interface" "example" {
   name                = "example-nic"
   location            = azurerm_resource_group.rg.location
   resource_group_name = azurerm_resource_group.rg.name
+  tags                = var.tags
 
   ip_configuration {
     name                          = "internal"
@@ -46,14 +62,16 @@ resource "azurerm_network_interface" "example" {
   }
 }
 
+# Create a window virtual machine
 ## <https://www.terraform.io/docs/providers/azurerm/r/windows_virtual_machine.html>
 resource "azurerm_windows_virtual_machine" "example" {
-  name                = "example-machine"
+  name                = "${var.prefix}-Master"
   resource_group_name = azurerm_resource_group.rg.name
   location            = azurerm_resource_group.rg.location
   size                = "Standard_F2"
   admin_username      = var.admin_username
   admin_password      = var.admin_password
+  tags                = var.tags
   availability_set_id = azurerm_availability_set.DemoAset.id
   network_interface_ids = [
     azurerm_network_interface.example.id,
