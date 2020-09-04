@@ -1,3 +1,8 @@
+provider "azurerm" {
+  version = "=2.5.0"
+  features {}
+}
+
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
     name = "Terra-K8s-Practise"
