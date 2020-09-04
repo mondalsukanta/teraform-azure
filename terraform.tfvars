@@ -1,2 +1,2 @@
 location = "eastus"
-prefix = "test"
+prefix = "dev"
