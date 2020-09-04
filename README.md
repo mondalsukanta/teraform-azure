@@ -5,9 +5,7 @@ Azure Provider -
 https://www.terraform.io/docs/providers/azurerm/index.html
 
 1) Terraform Variables set in Terraform cloud -
-location = "eastus"
-admin_username = "vm01_admin"
-admin_password  = "******"
+location = "eastus", admin_username = "vm01_admin", admin_password  = "******"
 
 2) Login to Azure account
 az login
