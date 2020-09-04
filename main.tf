@@ -5,7 +5,7 @@ provider "azurerm" {
 
 # Create Resource Group
 resource "azurerm_resource_group" "rg" {
-    name = "Terra-K8s-Practise"
+    name = "Terra-azure"
     location = var.location   
     tags = var.tags
 }
