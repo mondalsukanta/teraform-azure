@@ -103,6 +103,20 @@ resource "azurerm_network_interface" "nic" {
   }
 }
 
+resource "azurerm_network_interface" "nic" {
+  name                      = "azvm01NIC"
+  location                  = var.location
+  resource_group_name       = azurerm_resource_group.rg.name
+  tags                      = var.tags
+
+  ip_configuration {
+    name                          = "azvm01NICConfg"
+    subnet_id                     = azurerm_subnet.subnet.id
+    private_ip_address_allocation = "dynamic"
+    public_ip_address_id          = azurerm_public_ip.publicip.id
+  }
+}
+
 resource "azurerm_network_interface_security_group_association" "nic-nsg" {
   network_interface_id      = azurerm_network_interface.nic.id
   network_security_group_id = azurerm_network_security_group.nsg.id
