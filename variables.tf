@@ -1,4 +1,4 @@
-#variable "location" {}
+variable "location" {}
 
 #variable "admin_username" {
 #    type = string
