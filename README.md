@@ -17,7 +17,7 @@ Get subscription ID
 az account list --query [*].[name,id]
 Replace with Subscription ID above -
 az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/{SubID}" -n TerraformTesting | ConvertFrom-Json
-<p>
+<p> <div>
   This command will output 5 values:
   {
     "appId": "00000000-0000-0000-0000-000000000000",
@@ -26,6 +26,7 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/{SubID}" 
      "password": "0000-0000-0000-0000-000000000000",
      "tenant": "00000000-0000-0000-0000-000000000000"
   }
+  </div>
 </p>
 <p>
 These values map to the Terraform variables like so:
