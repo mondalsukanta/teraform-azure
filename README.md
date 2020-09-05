@@ -1,16 +1,16 @@
 # teraform-azure
 Azure cloud infrastructure automation using Terraform
 
-Azure Provider -
+<h1>Azure Provider</h1>
 https://www.terraform.io/docs/providers/azurerm/index.html
 
-1) Terraform Variables set in Terraform cloud -
+<h2>1) Terraform Variables set in Terraform cloud -</h2>
 location = "eastus", admin_username = "vm01_admin", admin_password  = "******"
 
-2) Login to Azure account
+<h2>2) Login to Azure account</h2>
 az login
 
-3) Create a Service Principal
+<h2>3) Create a Service Principal</h2>
 https://docs.microsoft.com/en-us/azure/active-directory/develop/howto-create-service-principal-portal
 https://www.terraform.io/docs/providers/azurerm/guides/service_principal_client_secret.html
 Get subscription ID
@@ -32,7 +32,7 @@ az ad sp create-for-rbac --role="Contributor" --scopes="/subscriptions/{SubID}" 
  password is the client_secret defined above.
  tenant is the tenant_id defined above.
 
-4) Terraform CLI commands -
+<h2>4) Terraform CLI commands -</h2>
 ### Intialise the Terraform ####
 terraform init
 
@@ -53,6 +53,6 @@ terraform state show 'azurerm_resource_group.rg'
 terraform plan -destory
 terraform destory
 
-5) Environment Variables set in Terraform cloud -
+<h2>5) Environment Variables set in Terraform cloud -</h2>
 ARM_SUBSCRIPTION_ID,ARM_CLIENT_ID,ARM_TENANT_ID,ARM_CLIENT_SECRET
 Properties defined in Azure login - Azure Active Directory -> App registrations
